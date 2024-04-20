@@ -1,0 +1,100 @@
+//#include <GL/freeglut.h>
+#include <windows.h>
+#include <GL\glut.h>
+#include <cstdlib>
+#include <iostream>
+#include <string.h>
+#include <math.h>
+#define _USE_MATH_DEFINES 
+#include <cmath>
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+
+void Inicializa(void) {
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glMatrixMode(GL_PROJECTION);
+    gluOrtho2D(0.0, 200.0, 0.0, 200.0);
+}
+
+void Dibuja(void) {
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(0.1, 0.1, 0.1);
+    for (int z = 0; z <= 200; z = z + 10) {
+        glBegin(GL_LINES);
+        glVertex2i(z, 0);  glVertex2i(z, 200);
+        glVertex2i(0, z);  glVertex2i(200, z);
+        glEnd();
+    }
+
+    // Dibujar cuadrado
+    glColor3f(1.0, 0.0, 0.0);
+    glBegin(GL_QUADS);
+    glVertex2i(10, 10);
+    glVertex2i(30, 10);
+    glVertex2i(30, 30);
+    glVertex2i(10, 30);
+    glEnd();
+
+    // Dibujar triángulo
+    glColor3f(0.0, 1.0, 0.0);
+    glBegin(GL_TRIANGLES);
+    glVertex2i(40, 10);
+    glVertex2i(60, 10);
+    glVertex2i(50, 30);
+    glEnd();
+
+    // Dibujar pentágono
+    glColor3f(0.0, 0.0, 1.0);
+    glBegin(GL_POLYGON);
+    for (int i = 0; i < 5; ++i) {
+        float angle = 2.0 * M_PI * i / 5;
+        glVertex2f(70 + 20 * cos(angle), 10 + 20 * sin(angle));
+    }
+    glEnd();
+
+    // Dibujar hexágono
+    glColor3f(1.0, 1.0, 0.0);
+    glBegin(GL_POLYGON);
+    for (int i = 0; i < 6; ++i) {
+        float angle = 2.0 * M_PI * i / 6;
+        glVertex2f(100 + 20 * cos(angle), 10 + 20 * sin(angle));
+    }
+    glEnd();
+
+    // Función para dibujar una estrella de cinco picos
+        glColor3f(1.0, 1.0, 1.0);
+        glBegin(GL_LINE_LOOP);
+        glVertex2i(16.88, 55.81);  
+        glVertex2i(58.12, 18.81);  
+        glVertex2i(8.54, 18.81);   
+        glVertex2i(49.38, 55.81);  
+        glVertex2i(33.33, 6.67);   
+       
+        glEnd();
+
+    glFlush();
+}
+
+int main(int argc, char* argv[]) {
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowPosition(300, 50);
+    glutInitWindowSize(600, 600);
+    glutCreateWindow("Figuras");
+    Inicializa();
+    glutDisplayFunc(Dibuja);
+    glutMainLoop();
+    return 0;
+}
+
+// Función para dibujar una estrella de cinco picos
+       //  glColor3f(1.0, 1.0, 1.0);
+       //  glBegin(GL_LINE_LOOP);
+       //   glVertex2i(50.63, 167.44);
+       // glVertex2i(174.37, 67.44);
+       //  glVertex2i(25.63, 67.44);
+       //  glVertex2i(149.37, 167.44);
+       //  glVertex2i(100, 20);
